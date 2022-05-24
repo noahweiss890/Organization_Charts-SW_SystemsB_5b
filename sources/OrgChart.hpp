@@ -22,6 +22,17 @@ namespace ariel {
                 }
                 return *this;
             }
+            OrgChart(OrgChart&& other) : head(nullptr) {
+                this->head = other.head;
+                other.head = nullptr;
+            }
+            OrgChart& operator=(OrgChart&& other) {
+                if (this != &other) {
+                    this->head = other.head;
+                    other.head = nullptr;
+                }
+                return *this;
+            }
             ~OrgChart() {
                 if(this->head != nullptr) {
                     queue<Node*> que;
