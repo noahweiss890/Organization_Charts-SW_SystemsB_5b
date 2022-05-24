@@ -12,7 +12,10 @@ namespace ariel {
     
     class OrgChart {
         public:
-            OrgChart();
+            OrgChart() { head = nullptr; }
+            OrgChart(const OrgChart &other) {
+                this->head = other.head;
+            }
             ~OrgChart() {
                 if(this->head != nullptr) {
                     queue<Node*> que;
