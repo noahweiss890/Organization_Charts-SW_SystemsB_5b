@@ -17,7 +17,9 @@ namespace ariel {
                 this->head = other.head;
             }
             OrgChart& operator=(const OrgChart& oc) {
-                this->head = oc.head;
+                if(this != &oc) {
+                    this->head = oc.head;   
+                }
                 return *this;
             }
             ~OrgChart() {
