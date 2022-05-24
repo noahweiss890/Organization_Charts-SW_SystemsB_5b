@@ -3,7 +3,7 @@ using namespace ariel;
 
 namespace ariel {
 
-    OrgChart& OrgChart::add_root(string root) {
+    OrgChart& OrgChart::add_root(string const &root) {
         if(this->head == nullptr) {
             // Node new_guy(root);
             this->head = new Node(root);
@@ -14,8 +14,8 @@ namespace ariel {
         return *this;
     }
 
-    OrgChart& OrgChart::add_sub(string sup, string sub) {
-        if(!this->head) {
+    OrgChart& OrgChart::add_sub(string const &sup, string const &sub) {
+        if(this->head == nullptr) {
             throw invalid_argument("can't add sub before root");
         }
         queue<Node*> que;
@@ -40,7 +40,7 @@ namespace ariel {
 
     OrgChart::level_order_iterator::level_order_iterator(Node* n) {
         this->curr = n;
-        if(n) {
+        if(n != nullptr) {
             this->que.push(n);
         }
     }
@@ -73,7 +73,7 @@ namespace ariel {
         return *this;
     }
 
-    const OrgChart::level_order_iterator OrgChart::level_order_iterator::operator++(int postfix_flag) {
+    OrgChart::level_order_iterator OrgChart::level_order_iterator::operator++(int postfix_flag) {
         OrgChart::level_order_iterator temp = *this;
         Node *curr_son = this->curr->eldest_son;
         while(curr_son != nullptr) {
@@ -98,12 +98,12 @@ namespace ariel {
     // reverse_order_iterator:
 
     OrgChart::reverse_order_iterator::reverse_order_iterator(Node* n) {
-        if(n) {
+        if(n != nullptr) {
             queue<Node*> que;
             que.push(n);
             while(!que.empty()) {
                 Node *curr_son = que.front()->eldest_son;
-                if(curr_son) {
+                if(curr_son != nullptr) {
                     while(curr_son->right_brother != nullptr) {
                         curr_son = curr_son->right_brother;
                     }
@@ -146,7 +146,7 @@ namespace ariel {
         return *this;
     }
 
-    const OrgChart::reverse_order_iterator OrgChart::reverse_order_iterator::operator++(int postfix_flag) {
+    OrgChart::reverse_order_iterator OrgChart::reverse_order_iterator::operator++(int postfix_flag) {
         OrgChart::reverse_order_iterator temp = *this;
         if(stk.empty()) {
             this->curr = nullptr;
@@ -182,16 +182,16 @@ namespace ariel {
     }
 
     OrgChart::preorder_iterator& OrgChart::preorder_iterator::operator++() {
-        if(this->curr->eldest_son) {
+        if(this->curr->eldest_son != nullptr) {
             this->curr = this->curr->eldest_son;
         }
-        else if(this->curr->right_brother) {
+        else if(this->curr->right_brother != nullptr) {
             this->curr = this->curr->right_brother;
         }
         else {
             this->curr = this->curr->dad;
             while(this->curr != nullptr) {
-                if(this->curr->right_brother) {
+                if(this->curr->right_brother != nullptr) {
                     this->curr = this->curr->right_brother;
                     return *this;
                 }
@@ -201,18 +201,18 @@ namespace ariel {
         return *this;
     }
 
-    const OrgChart::preorder_iterator OrgChart::preorder_iterator::operator++(int postfix_flag) {
+    OrgChart::preorder_iterator OrgChart::preorder_iterator::operator++(int postfix_flag) {
         OrgChart::preorder_iterator temp = *this;
-        if(this->curr->eldest_son) {
+        if(this->curr->eldest_son != nullptr) {
             this->curr = this->curr->eldest_son;
         }
-        else if(this->curr->right_brother) {
+        else if(this->curr->right_brother != nullptr) {
             this->curr = this->curr->right_brother;
         }
         else {
             this->curr = this->curr->dad;
             while(this->curr != nullptr) {
-                if(this->curr->right_brother) {
+                if(this->curr->right_brother != nullptr) {
                     this->curr = this->curr->right_brother;
                     return temp;
                 }
@@ -237,42 +237,42 @@ namespace ariel {
     }
 
     OrgChart::level_order_iterator OrgChart::begin_level_order() {
-        if(this->head) {
+        if(this->head != nullptr) {
             return OrgChart::level_order_iterator(this->head);
         }
         throw invalid_argument("orgchart is empty!");
     }
 
     OrgChart::level_order_iterator OrgChart::end_level_order() {
-        if(this->head) {
+        if(this->head != nullptr) {
             return OrgChart::level_order_iterator();
         }
         throw invalid_argument("orgchart is empty!");
     }
 
     OrgChart::reverse_order_iterator OrgChart::begin_reverse_order() {
-        if(this->head) {
+        if(this->head != nullptr) {
             return OrgChart::reverse_order_iterator(this->head);
         }
         throw invalid_argument("orgchart is empty!");
     }
 
     OrgChart::reverse_order_iterator OrgChart::reverse_order() {
-        if(this->head) {
+        if(this->head != nullptr) {
             return OrgChart::reverse_order_iterator();
         }
         throw invalid_argument("orgchart is empty!");
     }
 
     OrgChart::preorder_iterator OrgChart::begin_preorder() {
-        if(this->head) {
+        if(this->head != nullptr) {
             return OrgChart::preorder_iterator(this->head);
         }
         throw invalid_argument("orgchart is empty!");
     }
 
     OrgChart::preorder_iterator OrgChart::end_preorder() {
-        if(this->head) {
+        if(this->head != nullptr) {
             return OrgChart::preorder_iterator();
         }
         throw invalid_argument("orgchart is empty!");

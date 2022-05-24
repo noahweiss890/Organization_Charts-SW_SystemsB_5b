@@ -14,7 +14,7 @@ namespace ariel {
         public:
             OrgChart() { head = nullptr; }
             ~OrgChart() {
-                if(this->head) {
+                if(this->head != nullptr) {
                     queue<Node*> que;
                     que.push(this->head);
                     while(!que.empty()) {
@@ -46,7 +46,7 @@ namespace ariel {
                 Node* eldest_son;
                 Node* left_brother;
                 Node* right_brother;
-                Node(string name) {
+                Node(string &name) {
                     this->position = name;
                     this->dad = nullptr;
                     this->eldest_son = nullptr;
