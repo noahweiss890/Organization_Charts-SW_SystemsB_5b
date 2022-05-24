@@ -12,7 +12,7 @@ namespace ariel {
     
     class OrgChart {
         public:
-            OrgChart() { head = nullptr; }
+            // OrgChart() { head = nullptr; }
             ~OrgChart() {
                 if(this->head != nullptr) {
                     queue<Node*> que;
