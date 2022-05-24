@@ -30,8 +30,8 @@ namespace ariel {
                     }
                 }
             }
-            OrgChart& add_root(string root);
-            OrgChart& add_sub(string sup, string sub);
+            OrgChart& add_root(string const &root);
+            OrgChart& add_sub(string const &sup, string const &sub);
 
             friend ostream& operator<<(ostream& os, const OrgChart &orgch);
             bool operator==(const OrgChart &w) const;
