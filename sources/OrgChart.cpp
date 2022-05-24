@@ -277,18 +277,30 @@ namespace ariel {
     }
 
     ostream& operator<<(ostream& os, const OrgChart &orgch) {
-        os << orgch.head->position;
-        os << " ->  printing kids: ";
-        auto *curr_son = orgch.head->eldest_son;
+        // os << orgch.head->position;
+        // os << " ->  printing kids: ";
+        // auto *curr_son = orgch.head->eldest_son;
+        // while(curr_son != nullptr) {
+        //     os << curr_son->position << " ";
+        //     curr_son = curr_son->right_brother;
+        // }
+        os << "<----------OrgChart---------->" << endl << endl;;
+        OrgChart::print_tree(os, orgch.head, 0);
+        os << endl << "<----------OrgChart---------->" << endl;
+        return os;
+    }
+
+    void OrgChart::print_tree(ostream& os, Node *head, int indent) {
+        for(int i = 0; i < indent; i++) {
+            os << "    ";
+        }
+        os << "└──";
+        os << head->position << endl;
+        Node *curr_son = head->eldest_son;
         while(curr_son != nullptr) {
-            os << curr_son->position << " ";
+            OrgChart::print_tree(os, curr_son, indent + 1);
             curr_son = curr_son->right_brother;
         }
-        
-        // for(auto sub : orgch.head->get_subs()) {
-        //     os << sub->position << " ";
-        // }
-        return os;
     }
 
     bool OrgChart::operator==(const OrgChart &w) const {

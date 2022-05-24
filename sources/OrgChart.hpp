@@ -76,6 +76,8 @@ namespace ariel {
             // field
             Node *head;
         
+            static void print_tree(ostream& os, Node *head, int indent);
+
         public:
 
             class level_order_iterator {
