@@ -14,18 +14,20 @@ namespace ariel {
         public:
             OrgChart() { head = nullptr; }
             ~OrgChart() {
-                queue<Node*> que;
-                que.push(this->head);
-                while(!que.empty()) {
-                    Node *curr_son = que.front()->eldest_son;
-                    while(curr_son != nullptr) {
-                        que.push(curr_son);
-                        curr_son = curr_son->right_brother;
+                if(this->head) {
+                    queue<Node*> que;
+                    que.push(this->head);
+                    while(!que.empty()) {
+                        Node *curr_son = que.front()->eldest_son;
+                        while(curr_son != nullptr) {
+                            que.push(curr_son);
+                            curr_son = curr_son->right_brother;
+                        }
+                        Node *rem = que.front();
+                        que.pop();
+                        // cout << "deleting: " << rem->position << endl;
+                        delete rem;
                     }
-                    Node *rem = que.front();
-                    que.pop();
-                    // cout << "deleting: " << rem->position << endl;
-                    delete rem;
                 }
             }
             OrgChart& add_root(string root);
@@ -45,7 +47,6 @@ namespace ariel {
                 Node* left_brother;
                 Node* right_brother;
                 Node(string name) {
-                    // cout << "Node ctor got name: " << name << endl;
                     this->position = name;
                     this->dad = nullptr;
                     this->eldest_son = nullptr;
