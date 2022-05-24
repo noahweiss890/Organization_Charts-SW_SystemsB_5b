@@ -90,7 +90,7 @@ namespace ariel {
                     bool operator!=(const level_order_iterator &it) const;
                     string& operator*() const;
                     level_order_iterator& operator++();
-                    const level_order_iterator operator++(int postfix_flag);
+                    level_order_iterator operator++(int postfix_flag);
                     string* operator->() const;
             };
 
@@ -103,7 +103,7 @@ namespace ariel {
                     bool operator!=(const reverse_order_iterator &it) const;
                     string& operator*() const;
                     reverse_order_iterator& operator++();
-                    const reverse_order_iterator operator++(int postfix_flag);
+                    reverse_order_iterator operator++(int postfix_flag);
                     string* operator->();
             };
 
@@ -115,7 +115,7 @@ namespace ariel {
                     bool operator!=(const preorder_iterator &it) const;
                     string& operator*() const;
                     preorder_iterator& operator++();
-                    const preorder_iterator operator++(int postfix_flag);
+                    preorder_iterator operator++(int postfix_flag);
                     string* operator->();
             };
 
