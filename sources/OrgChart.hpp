@@ -22,11 +22,11 @@ namespace ariel {
                 }
                 return *this;
             }
-            OrgChart(OrgChart&& other) : head(nullptr) {
+            OrgChart(OrgChart&& other) noexcept : head(nullptr) {
                 this->head = other.head;
                 other.head = nullptr;
             }
-            OrgChart& operator=(OrgChart&& other) {
+            OrgChart& operator=(OrgChart&& other) noexcept {
                 if (this != &other) {
                     this->head = other.head;
                     other.head = nullptr;
